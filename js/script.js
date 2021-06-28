@@ -1,6 +1,15 @@
 "use strict";
-let numberOfFilms = +prompt("How many films you have already watched", "");
-console.log(numberOfFilms);
+let numberOfFilms; 
+
+function start() {
+    numberOfFilms = +prompt("How many films you have already watched", ""); 
+    while (numberOfFilms == "" || numberOfFilms == null || isNaN(numberOfFilms)) {
+        numberOfFilms = +prompt("How many films you have already watched", ""); 
+    }
+}
+
+start();
+
 
 let personalMovieDB = {
     count: numberOfFilms,
@@ -11,43 +20,58 @@ let personalMovieDB = {
 };
 
 
-for (let i = 0; i < 2; i++) {
-    let a = prompt("What is the last film you watched?", ""),
-        b = prompt("Please rate it in numbers", "");
+// for (let i = 0; i < 2; i++) {
+//     let a = prompt("What is the last film you watched?", ""),
+//         b = prompt("Please rate it in numbers", "");
+//         if (a != "" & b != "" & a != null & b != null & a.length < 50) {
+//             personalMovieDB.movies[a] = b; 
+//            } else {
+//                console.log("Error");
+//                i--;
+//            }
+// }
+function rememberMyFilms() {
+    let i = 0;
+    while (i < 2) {
+        let a = prompt("What is the last film you watched?", ""),
+            b = prompt("Please rate it in numbers", "");
+            i++;
         if (a != "" & b != "" & a != null & b != null & a.length < 50) {
             personalMovieDB.movies[a] = b; 
-           } else {
-               console.log("Error");
-               i--;
-           }
-}
-
-if (personalMovieDB.count < 10 ) {
-    console.log("Просмотрено довольно мало фильмов");
-} else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
-    console.log("Вы классический зритель");
-} else if (personalMovieDB.count >= 30) {
-        console.log("Вы киноман");
+        } else {
+            console.log("Error");
+            i--;
+        }
     }
-    else {
-            console.log("Произошла ошибка");
-        
 }
-console.log(personalMovieDB);
-/* Задание на урок:
+// rememberMyFilms();
 
+function detectPersonalLevel () {
+    if (personalMovieDB.count < 10 ) {
+        console.log("Просмотрено довольно мало фильмов");
+    } else if (personalMovieDB.count >= 10 && personalMovieDB.count < 30) {
+        console.log("Вы классический зритель");
+    } else if (personalMovieDB.count >= 30) {
+            console.log("Вы киноман");
+    }  else {
+            console.log("Произошла ошибка");
+            
+    }
+}
 
+// detectPersonalLevel();
 
-2) Сделать так, чтобы пользователь не мог оставить ответ в виде пустой строки,
-отменить ответ или ввести название фильма длинее, чем 50 символов. Если это происходит - 
-возвращаем пользователя к вопросам опять
+function showMyDB(hidden) {
+    if(!hidden) {
+        console.log(personalMovieDB);
+    }
+}
 
-3) При помощи условий проверить  personalMovieDB.count, и если он меньше 10 - вывести сообщение
-"Просмотрено довольно мало фильмов", если от 10 до 30 - "Вы классический зритель", а если больше - 
-"Вы киноман". А если не подошло ни к одному варианту - "Произошла ошибка"
+showMyDB(personalMovieDB.privat);
 
-4) Потренироваться и переписать цикл еще двумя способами*/
-
-
-
-// Код возьмите из предыдущего домашнего задания
+function writeYourGenres () {
+    for (let i = 0; i < 3; i++) {
+        personalMovieDB.genres[i] = prompt(`Your favourite genre number ${i+1}`);
+    }
+}
+writeYourGenres();
